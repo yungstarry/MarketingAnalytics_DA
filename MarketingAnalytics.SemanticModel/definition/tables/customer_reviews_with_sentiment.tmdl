@@ -1,0 +1,99 @@
+table customer_reviews_with_sentiment
+	lineageTag: e64014ad-7e0e-4167-9a45-f5d1bacccdee
+
+	column ReviewID
+		dataType: int64
+		formatString: 0
+		lineageTag: 6fee7777-ebfe-4a48-b249-ebb783eac836
+		summarizeBy: count
+		sourceColumn: ReviewID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerID
+		dataType: int64
+		formatString: 0
+		lineageTag: 85cff255-f51d-40d3-987e-f75d70950e89
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductID
+		dataType: int64
+		formatString: 0
+		lineageTag: b30e3617-8783-464a-9d8e-129608f89dd5
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReviewDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3e4f8f21-6038-435b-83f8-f86db3648155
+		summarizeBy: none
+		sourceColumn: ReviewDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Rating
+		dataType: int64
+		formatString: 0
+		lineageTag: 2d387c6b-9674-4206-989e-22ff562eefbb
+		summarizeBy: sum
+		sourceColumn: Rating
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReviewText
+		dataType: string
+		lineageTag: cab393c9-887d-4362-b301-9b61454f00ab
+		summarizeBy: none
+		sourceColumn: ReviewText
+
+		annotation SummarizationSetBy = Automatic
+
+	column SentimentScore
+		dataType: double
+		lineageTag: bf09f919-55f1-4586-bf8e-c7768cb50ac0
+		summarizeBy: sum
+		sourceColumn: SentimentScore
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SentimentCategory
+		dataType: string
+		lineageTag: 97e02b56-6d42-4a6f-bba8-c3468131fb14
+		summarizeBy: none
+		sourceColumn: SentimentCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column SentimentBucket
+		dataType: string
+		lineageTag: 50fcb923-0480-447f-91d0-6c347d2363ce
+		summarizeBy: none
+		sourceColumn: SentimentBucket
+
+		annotation SummarizationSetBy = Automatic
+
+	partition customer_reviews_with_sentiment = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\HP\OneDrive\Desktop\MarketingAnalytics_DA\customer_reviews_with_sentiment.csv"),[Delimiter=",", Columns=9, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ReviewID", Int64.Type}, {"CustomerID", Int64.Type}, {"ProductID", Int64.Type}, {"ReviewDate", type date}, {"Rating", Int64.Type}, {"ReviewText", type text}, {"SentimentScore", type number}, {"SentimentCategory", type text}, {"SentimentBucket", type text}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Changed Type","  "," ",Replacer.ReplaceText,{"ReviewText"})
+				in
+				    #"Replaced Value"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

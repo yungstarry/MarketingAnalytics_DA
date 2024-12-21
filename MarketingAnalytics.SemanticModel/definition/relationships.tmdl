@@ -1,0 +1,49 @@
+relationship 71680356-c91f-8447-328b-8ea1933ae982
+	fromColumn: fact_customer_journey.CustomerID
+	toColumn: dim_customers.CustomerID
+
+relationship ea344cd6-3c25-b1cb-0c29-ad0a168a6de0
+	fromColumn: fact_customer_reviews.CustomerID
+	toColumn: dim_customers.CustomerID
+
+relationship bfa135fe-6522-f3c6-3b82-c2efd1fe7171
+	fromColumn: customer_reviews_with_sentiment.CustomerID
+	toColumn: dim_customers.CustomerID
+
+relationship 18498f6b-df8d-90d5-eda8-897d939abfea
+	fromColumn: fact_customer_journey.ProductID
+	toColumn: dim_products.ProductID
+
+relationship 26b84bea-5199-a8c0-96db-82b4bfe754e2
+	fromColumn: fact_customer_reviews.ProductID
+	toColumn: dim_products.ProductID
+
+relationship 5603ccae-f4aa-3679-205b-5bfa5865b326
+	fromColumn: fact_engagement_data.ProductID
+	toColumn: dim_products.ProductID
+
+relationship 6b992078-65c6-3f0f-8aed-a97f455fb329
+	fromColumn: customer_reviews_with_sentiment.ProductID
+	toColumn: dim_products.ProductID
+
+relationship fd1244ac-3371-4974-8bda-80dfbbcf23d7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendar.Date
+	toColumn: LocalDateTable_b9a68a12-2c2d-4a49-9ef7-c9d8e18c5cad.Date
+
+relationship 44c72fee-a870-8623-1639-ca8e766837aa
+	fromColumn: fact_customer_journey.VisitDate
+	toColumn: Calendar.Date
+
+relationship 46d2ef3b-3f75-c494-fa59-31d9fff250b4
+	fromColumn: fact_customer_reviews.ReviewDate
+	toColumn: Calendar.Date
+
+relationship a09078f8-6753-67f4-0b47-3758e94baf09
+	fromColumn: fact_engagement_data.EngagementDate
+	toColumn: Calendar.Date
+
+relationship 33b02760-12db-463e-6f34-77779d3b96f7
+	fromColumn: customer_reviews_with_sentiment.ReviewDate
+	toColumn: Calendar.Date
+

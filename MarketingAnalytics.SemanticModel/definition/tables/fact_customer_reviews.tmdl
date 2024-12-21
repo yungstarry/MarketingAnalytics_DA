@@ -1,0 +1,79 @@
+table fact_customer_reviews
+	lineageTag: 853f4169-da12-476c-8fc0-4b1508255257
+
+	column ReviewID
+		dataType: int64
+		formatString: 0
+		lineageTag: a85135f0-8976-4a01-93cd-ae22607db0f2
+		summarizeBy: count
+		sourceColumn: ReviewID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerID
+		dataType: int64
+		formatString: 0
+		lineageTag: f306df73-cf2b-47c5-b08c-c6263a46706d
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductID
+		dataType: int64
+		formatString: 0
+		lineageTag: d3569d09-f45c-4a28-9aef-fe37ad80a68d
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReviewDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c15acd30-10e0-40af-8d1d-0ff9c3601873
+		summarizeBy: none
+		sourceColumn: ReviewDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Rating
+		dataType: int64
+		formatString: 0
+		lineageTag: 46fd79be-aaf7-4801-be39-e4d8c9aa365b
+		summarizeBy: sum
+		sourceColumn: Rating
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReviewText
+		dataType: string
+		lineageTag: ee1509fd-0e9f-48d0-a483-f5208f8c4719
+		summarizeBy: none
+		sourceColumn: ReviewText
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column1
+		dataType: string
+		lineageTag: 46ada041-2ee2-438b-9d13-c9e2ae0654f1
+		summarizeBy: none
+		sourceColumn: Column1
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_customer_reviews = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("DESKTOP-D8BRM8F", "MarketingAnalytics", [Query="select ReviewID,#(lf)#(tab)#(tab)CustomerID,#(lf)#(tab)#(tab)ProductID,#(lf)#(tab)#(tab)ReviewDate,#(lf)#(tab)#(tab)Rating,#(lf)#(tab)#(tab)REPLACE(ReviewText, '  ', ' ') as ReviewText,#(lf)#(tab)#(tab)TRIM(ReviewText)#(lf)#(lf)from customer_reviews#(lf)#(lf)"]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"ReviewDate", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

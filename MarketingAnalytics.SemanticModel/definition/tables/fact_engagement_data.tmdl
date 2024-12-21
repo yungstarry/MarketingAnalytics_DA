@@ -1,0 +1,100 @@
+table fact_engagement_data
+	lineageTag: a85cb365-632a-4dbd-8d5a-83358675476d
+
+	column EngagementID
+		dataType: int64
+		formatString: 0
+		lineageTag: 10a3b40e-1f5d-438a-b760-a385acebdc4a
+		summarizeBy: count
+		sourceColumn: EngagementID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ContentID
+		dataType: int64
+		formatString: 0
+		lineageTag: 3068bedb-c13d-4d6d-bdb0-94ab0df13206
+		summarizeBy: count
+		sourceColumn: ContentID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ContentType
+		dataType: string
+		lineageTag: 58d3e28f-83bf-466e-8755-e19bb182ce9a
+		summarizeBy: none
+		sourceColumn: ContentType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Likes
+		dataType: int64
+		formatString: 0
+		lineageTag: 42503260-c33b-440d-8adf-baaafb77577d
+		summarizeBy: sum
+		sourceColumn: Likes
+
+		annotation SummarizationSetBy = Automatic
+
+	column EngagementDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: efa7dbfd-f4b2-4ac6-b9c9-a6df5f561cac
+		summarizeBy: none
+		sourceColumn: EngagementDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CampaignID
+		dataType: int64
+		formatString: 0
+		lineageTag: 1cf9599d-32d4-464d-afe1-0eabf63036c9
+		summarizeBy: count
+		sourceColumn: CampaignID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductID
+		dataType: int64
+		formatString: 0
+		lineageTag: f8d51a97-c817-4ca8-bb80-e49425f02cb2
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Views
+		dataType: int64
+		formatString: 0
+		lineageTag: 764921e9-f47d-43f3-83f8-d3308a800b9b
+		summarizeBy: sum
+		sourceColumn: Views
+
+		annotation SummarizationSetBy = Automatic
+
+	column Clicks
+		dataType: int64
+		formatString: 0
+		lineageTag: 8b618008-d3b6-4891-9de5-e49ad3a137e3
+		summarizeBy: sum
+		sourceColumn: Clicks
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_engagement_data = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("DESKTOP-D8BRM8F", "MarketingAnalytics", [Query="#(lf)select EngagementID,#(lf)#(tab)#(tab)ContentID,#(lf)#(tab)#(tab)CampaignID,#(lf)#(tab)#(tab)ProductID,#(lf)#(tab)#(tab)UPPER(Replace(ContentType,'Socialmedia','Social Media')) AS ContentType,#(lf)#(tab)#(tab)LEFT(ViewsClicksCombined, CHARINDEX('-', ViewsClicksCombined) -1) AS Views,#(lf)#(tab)#(tab)RIGHT(ViewsClicksCombined, LEN(ViewsClicksCombined) - CHARINDEX('-', ViewsClicksCombined)) as Clicks,#(lf)#(tab)#(tab)#(tab)#(lf)#(tab)#(tab)Likes,#(lf)#(tab)#(tab)FORMAT(CONVERT(DATE, EngagementDate), 'dd.MM.yyyy') as EngagementDate#(tab)   #(lf)from engagement_data#(lf)where #(lf)#(tab)ContentType != 'Newsletter'#(lf)#(lf)"]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Clicks", Int64.Type}, {"Views", Int64.Type}}),
+				    #"Changed Type with Locale" = Table.TransformColumnTypes(#"Changed Type", {{"EngagementDate", type datetime}}, "en-GB"),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Changed Type with Locale",{{"EngagementDate", type date}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,73 @@
+table dim_customers
+	lineageTag: 0f198b4d-856b-4e63-9a76-b31fae3275d2
+
+	column CustomerID
+		dataType: int64
+		formatString: 0
+		lineageTag: 4fd84e94-6651-47ea-be7e-3e2d653fa02b
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerName
+		dataType: string
+		lineageTag: cbcc7098-70d5-4ee1-9508-c3dacd41eedc
+		summarizeBy: none
+		sourceColumn: CustomerName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Email
+		dataType: string
+		lineageTag: e586e4b1-0230-4985-a938-5bc8d651c4dc
+		summarizeBy: none
+		sourceColumn: Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: string
+		lineageTag: d4737a2f-a599-446f-a436-3622060dc865
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column Age
+		dataType: int64
+		formatString: 0
+		lineageTag: e7444b80-414b-4c17-9107-c2efb7ef2078
+		summarizeBy: sum
+		sourceColumn: Age
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: dfa3f1d8-cb3c-42e5-9eec-0a7ac8c866b9
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: 33fd6f59-85fe-4191-9006-07ec21d26010
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_customers = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("DESKTOP-D8BRM8F", "MarketingAnalytics", [Query="select c.CustomerID, c.CustomerName, #(lf)#(tab)#(tab)c.Email, C.Gender, C.Age,#(lf)#(tab)#(tab)g.Country, g.City#(lf)from customers as c#(lf)left join geography g#(lf)on c.GeographyID = g.GeographyID"])
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

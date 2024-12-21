@@ -1,0 +1,50 @@
+table dim_products
+	lineageTag: 08e9435a-a0e5-4748-bce9-7f42fe3e76a5
+
+	column ProductID
+		dataType: int64
+		formatString: 0
+		lineageTag: c26d89cd-c0d0-4e9a-ba6e-d1a9771c92c7
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductName
+		dataType: string
+		lineageTag: a0a4c473-149c-4955-94ae-df0e3dd0b8af
+		summarizeBy: none
+		sourceColumn: ProductName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Price
+		dataType: double
+		lineageTag: f444c56c-2ae4-4030-a14c-35b9b62c57fc
+		summarizeBy: sum
+		sourceColumn: Price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PriceCategory
+		dataType: string
+		lineageTag: 0bdb76cb-30f4-4091-b764-e1592f67bcbf
+		summarizeBy: none
+		sourceColumn: PriceCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_products = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("DESKTOP-D8BRM8F", "MarketingAnalytics", [Query="select ProductID, ProductName, Price, #(lf)#(tab)case #(lf)#(tab)when Price < 50 then 'Low'#(lf)#(tab)when Price between 50 and 200 then 'Medium'#(lf)#(tab)else 'High'#(lf)#(tab)end as PriceCategory#(lf)from products#(lf)"])
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

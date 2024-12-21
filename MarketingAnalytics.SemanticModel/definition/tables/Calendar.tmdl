@@ -1,0 +1,139 @@
+table Calendar
+	lineageTag: 9f9f5517-0904-49ec-b976-6ba485e027bf
+
+	column Date
+		formatString: General Date
+		lineageTag: 0d350c70-3a26-42c9-9810-2bf92a06c93c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: fd1244ac-3371-4974-8bda-80dfbbcf23d7
+			defaultHierarchy: LocalDateTable_b9a68a12-2c2d-4a49-9ef7-c9d8e18c5cad.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateAsInteger
+		lineageTag: 41bb977f-ea74-451b-b476-1d2caf9feeed
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [DateAsInteger]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		formatString: 0
+		lineageTag: 29dac75e-a05f-4dc7-9672-961082ae3f56
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Monthnumber
+		lineageTag: 9e597dc4-661c-4f7e-90e0-32c1bfce7653
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Monthnumber]
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonthnumber
+		lineageTag: 6615d1b8-d851-48b8-a7e9-87ee48534780
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [YearMonthnumber]
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonthShort
+		lineageTag: 34229b4d-c6e0-4b53-aeac-58723db6a8d8
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [YearMonthShort]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthNameShort
+		lineageTag: c38033bd-6c4e-49e0-b954-508c7386e043
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [MonthNameShort]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthNameLong
+		lineageTag: e1eb855a-dfaf-4645-af62-fa297b83ecb1
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [MonthNameLong]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayOfWeekNumber
+		formatString: 0
+		lineageTag: 6ad2e023-8496-4173-bb43-023e426c480d
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [DayOfWeekNumber]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayOfWeek
+		lineageTag: 03be0461-b06c-4c28-bfde-62a48bd78fdb
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [DayOfWeek]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayOfWeekShort
+		lineageTag: f560442c-4229-4154-85dd-c13b9e8c35da
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [DayOfWeekShort]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		lineageTag: 38243012-c445-4085-b855-e300eef4829f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Quarter]
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearQuarter
+		lineageTag: 1ba3f1b2-15ce-4897-8633-dcd7002b5250
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [YearQuarter]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calendar = calculated
+		mode: import
+		source =
+				
+				ADDCOLUMNS (
+				    CALENDAR ( DATE ( 2023, 1, 1 ), DATE ( 2025, 12, 31 ) ),
+				    "DateAsInteger", FORMAT ( [Date], "YYYYMMDD" ),
+				    "Year", YEAR ( [Date] ),
+				    "Monthnumber", FORMAT ( [Date], "MM" ),
+				    "YearMonthnumber", FORMAT ( [Date], "YYYY/MM" ),
+				    "YearMonthShort", FORMAT ( [Date], "YYYY/mmm" ),
+				    "MonthNameShort", FORMAT ( [Date], "mmm" ),
+				    "MonthNameLong", FORMAT ( [Date], "mmmm" ),
+				    "DayOfWeekNumber", WEEKDAY ( [Date] ),
+				    "DayOfWeek", FORMAT ( [Date], "dddd" ),
+				    "DayOfWeekShort", FORMAT ( [Date], "ddd" ),
+				    "Quarter", "Q" & FORMAT ( [Date], "Q" ),
+				    "YearQuarter",
+				        FORMAT ( [Date], "YYYY" ) & "/Q"
+				            & FORMAT ( [Date], "Q" )
+				)
+
+	annotation PBI_Id = 029ea115f2e9442bbab55c5fc0a643e0
+

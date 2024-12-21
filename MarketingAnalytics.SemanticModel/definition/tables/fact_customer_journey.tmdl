@@ -1,0 +1,80 @@
+table fact_customer_journey
+	lineageTag: 5f7a18b4-9c60-49c9-bea8-ac49a61da36d
+
+	column JourneyID
+		dataType: int64
+		formatString: 0
+		lineageTag: ee0e4b37-7fcc-4f89-966f-eaa354f2ceb6
+		summarizeBy: count
+		sourceColumn: JourneyID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerID
+		dataType: int64
+		formatString: 0
+		lineageTag: 8ffee1a6-5570-4ca5-82bb-c730ef425daa
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductID
+		dataType: int64
+		formatString: 0
+		lineageTag: f345631a-4a17-48fe-ac03-3758320354c8
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		annotation SummarizationSetBy = Automatic
+
+	column VisitDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d71f0ae0-fb15-43cc-b9e7-5d438a0a22e8
+		summarizeBy: none
+		sourceColumn: VisitDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Stage
+		dataType: string
+		lineageTag: a4955a47-fe09-4deb-b617-8948fcb08069
+		summarizeBy: none
+		sourceColumn: Stage
+
+		annotation SummarizationSetBy = Automatic
+
+	column Action
+		dataType: string
+		lineageTag: 0ccde31e-3d8e-4b46-8830-e64d60813770
+		summarizeBy: none
+		sourceColumn: Action
+
+		annotation SummarizationSetBy = Automatic
+
+	column Duration
+		dataType: double
+		lineageTag: 37c6c22c-0b74-4ef4-b2b4-ad92e6030dd3
+		summarizeBy: sum
+		sourceColumn: Duration
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition fact_customer_journey = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("DESKTOP-D8BRM8F", "MarketingAnalytics", [Query="#(lf)select#(lf)#(tab)#(tab)JourneyID,#(lf)#(tab)#(tab)CustomerID,#(lf)#(tab)#(tab)ProductID,#(lf)#(tab)#(tab)VisitDate,#(lf)#(tab)#(tab)Stage,#(lf)#(tab)#(tab)Action,#(lf)#(tab)#(tab)COALESCE(Duration, avg_duration) As Duration#(lf)from ( select #(lf)#(tab)#(tab)JourneyID,#(lf)#(tab)#(tab)CustomerID,#(lf)#(tab)#(tab)ProductID,#(lf)#(tab)#(tab)VisitDate,#(lf)#(tab)#(tab)Upper(Stage) As Stage,#(lf)#(tab)#(tab)Action,#(lf)#(tab)#(tab)Duration,#(lf)#(tab)#(tab)avg(Duration) over (partition by VisitDate) as avg_duration,#(lf)#(tab)#(tab)ROW_NUMBER() Over(#(lf)#(tab)#(tab)#(tab)#(tab)#(tab)partition by CustomerID, ProductID, VisitDate, Stage,Action#(lf)#(tab)#(tab)#(tab)#(tab)#(tab)order by JourneyID#(lf)#(tab)#(tab)#(tab)#(tab)#(tab)) as row_num#(lf)#(tab)from customer_journey#(lf)#(lf)#(tab)) As Subquery#(lf)#(tab)where#(lf)#(tab)row_num = 1#(lf)#(lf)#(lf)"]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"VisitDate", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
