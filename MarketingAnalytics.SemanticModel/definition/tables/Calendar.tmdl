@@ -61,6 +61,7 @@ table Calendar
 		summarizeBy: none
 		isNameInferred
 		sourceColumn: [MonthNameShort]
+		sortByColumn: Monthnumber
 
 		annotation SummarizationSetBy = Automatic
 

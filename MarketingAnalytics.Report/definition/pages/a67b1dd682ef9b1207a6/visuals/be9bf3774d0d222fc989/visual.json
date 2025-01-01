@@ -1,0 +1,75 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "name": "be9bf3774d0d222fc989",
+  "position": {
+    "x": 565.37969386928694,
+    "y": 102.62667710498609,
+    "z": 6001,
+    "height": 522.46308344356555,
+    "width": 1246.4476419296493,
+    "tabOrder": 6001
+  },
+  "visual": {
+    "visualType": "columnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "customer_reviews_with_sentiment"
+                    }
+                  },
+                  "Property": "Rating"
+                }
+              },
+              "queryRef": "customer_reviews_with_sentiment.Rating",
+              "nativeQueryRef": "Sum of Rating",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Calculations"
+                    }
+                  },
+                  "Property": "# of customer journeys"
+                }
+              },
+              "queryRef": "_Calculations.# of customer journeys",
+              "nativeQueryRef": "# of customer journeys"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Calculations"
+                  }
+                },
+                "Property": "# of customer journeys"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

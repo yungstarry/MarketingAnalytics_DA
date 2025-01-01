@@ -27,7 +27,7 @@ table _Calculations
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure Views = SUM(fact_engagement_data[Views])
-		formatString: 0
+		formatString: #,0
 		lineageTag: 31c38b58-0979-4d1b-aed3-3d8602130088
 
 	measure 'Conversion Rate' =
@@ -44,9 +44,8 @@ table _Calculations
 			    0,
 			    DIVIDE(TotalPurchases, TotalVisitors)
 			)
+		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: 6eac3e24-0d56-4a49-b7ca-711786dcf77b
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	partition _Calculations = m
 		mode: import
