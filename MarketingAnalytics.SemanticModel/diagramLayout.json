@@ -11,7 +11,7 @@
         {
           "location": {
             "x": 241.8918918918919,
-            "y": 406.27027027027032
+            "y": 439.24324324324323
           },
           "nodeIndex": "fact_customer_journey",
           "nodeLineageTag": "5f7a18b4-9c60-49c9-bea8-ac49a61da36d",
@@ -24,7 +24,7 @@
         {
           "location": {
             "x": 569.1351351351351,
-            "y": 406.27027027027032
+            "y": 439.24324324324323
           },
           "nodeIndex": "fact_customer_reviews",
           "nodeLineageTag": "853f4169-da12-476c-8fc0-4b1508255257",
@@ -37,7 +37,7 @@
         {
           "location": {
             "x": 881.51351351351354,
-            "y": 370.10810810810813
+            "y": 403.08108108108104
           },
           "nodeIndex": "fact_engagement_data",
           "nodeLineageTag": "a85cb365-632a-4dbd-8d5a-83358675476d",
@@ -50,7 +50,7 @@
         {
           "location": {
             "x": 357.40540540540536,
-            "y": 56.270270270270288
+            "y": 89.2432432432432
           },
           "nodeIndex": "dim_customers",
           "nodeLineageTag": "0f198b4d-856b-4e63-9a76-b31fae3275d2",
@@ -63,7 +63,7 @@
         {
           "location": {
             "x": 792.75675675675677,
-            "y": 67.945945945945951
+            "y": 100.91891891891886
           },
           "nodeIndex": "dim_products",
           "nodeLineageTag": "08e9435a-a0e5-4748-bce9-7f42fe3e76a5",
@@ -76,7 +76,7 @@
         {
           "location": {
             "x": 1193.2432391192463,
-            "y": 363.35135135135141
+            "y": 396.32432432432432
           },
           "nodeIndex": "customer_reviews_with_sentiment",
           "nodeLineageTag": "e64014ad-7e0e-4167-9a45-f5d1bacccdee",
@@ -89,12 +89,25 @@
         {
           "location": {
             "x": 1132.6486445246517,
-            "y": 26.378378378378386
+            "y": 59.3513513513513
           },
           "nodeIndex": "Calendar",
           "nodeLineageTag": "9f9f5517-0904-49ec-b976-6ba485e027bf",
           "size": {
             "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1235.3513472273544,
+            "y": 300.83783783783781
+          },
+          "nodeIndex": "_Calculations",
+          "nodeLineageTag": "51cbee3a-5d98-40ce-ba4d-76d5f174174f",
+          "size": {
+            "height": 104,
             "width": 234
           },
           "zIndex": 0

@@ -1,0 +1,62 @@
+table _Calculations
+	lineageTag: 51cbee3a-5d98-40ce-ba4d-76d5f174174f
+
+	measure Clicks = SUM(fact_engagement_data[Clicks])
+		formatString: 0
+		lineageTag: 8bb35a2a-3d4b-4637-aac3-1d224a0b4448
+
+	measure Likes = SUM(fact_engagement_data[Likes])
+		formatString: 0
+		lineageTag: d71e081a-6ce5-4e2e-997d-ebb0a9da7c8d
+
+	measure 'Number of Campaign' = DISTINCTCOUNT(fact_engagement_data[CampaignID])
+		formatString: 0
+		lineageTag: 314e31dd-6421-4ed1-8ec7-96d6d90db9bc
+
+	measure '# of customer journeys' = DISTINCTCOUNT(fact_customer_journey[JourneyID])
+		formatString: 0
+		lineageTag: 4ed05d8b-4bd9-41d1-bb42-07acd472a2c8
+
+	measure '# of customer reviews' = DISTINCTCOUNT(customer_reviews_with_sentiment[ReviewID])
+		formatString: 0
+		lineageTag: 98ad0c41-32a4-443d-b045-338d4de7b511
+
+	measure 'AVG Rating' = AVERAGE(customer_reviews_with_sentiment[Rating])
+		lineageTag: 19163eec-5cb2-4cf2-abb7-c13ce37a42b9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Views = SUM(fact_engagement_data[Views])
+		formatString: 0
+		lineageTag: 31c38b58-0979-4d1b-aed3-3d8602130088
+
+	measure 'Conversion Rate' =
+			
+			
+			VAR TotalVisitors = CALCULATE(COUNT(fact_customer_journey[JourneyID]), fact_customer_journey[Action] = "View")
+			
+			VAR TotalPurchases = CALCULATE(COUNT(fact_customer_journey[JourneyID]), fact_customer_journey[Action] = "Purchase")
+			
+			RETURN
+			
+			if(
+			    TotalVisitors = 0,
+			    0,
+			    DIVIDE(TotalPurchases, TotalVisitors)
+			)
+		lineageTag: 6eac3e24-0d56-4a49-b7ca-711786dcf77b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition _Calculations = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

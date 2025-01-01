@@ -6,7 +6,7 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["fact_customer_journey","fact_customer_reviews","fact_engagement_data","dim_customers","dim_products","customer_reviews_with_sentiment"]
+annotation PBI_QueryOrder = ["fact_customer_journey","fact_customer_reviews","fact_engagement_data","dim_customers","dim_products","customer_reviews_with_sentiment","_Calculations"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
@@ -23,6 +23,7 @@ ref table dim_products
 ref table customer_reviews_with_sentiment
 ref table Calendar
 ref table LocalDateTable_b9a68a12-2c2d-4a49-9ef7-c9d8e18c5cad
+ref table _Calculations
 
 ref cultureInfo en-US
 
