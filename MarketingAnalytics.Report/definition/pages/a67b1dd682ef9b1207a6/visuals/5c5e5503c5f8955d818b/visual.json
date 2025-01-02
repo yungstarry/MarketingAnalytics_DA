@@ -50,6 +50,24 @@
             }
           ]
         },
+        "Size": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Calculations"
+                    }
+                  },
+                  "Property": "# of customer reviews"
+                }
+              },
+              "queryRef": "_Calculations.# of customer reviews",
+              "nativeQueryRef": "# of customer reviews"
+            }
+          ]
+        },
         "X": {
           "projections": [
             {
@@ -88,6 +106,21 @@
           ]
         }
       }
+    },
+    "objects": {
+      "bubbles": [
+        {
+          "properties": {
+            "bubbleSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "-24L"
+                }
+              }
+            }
+          }
+        }
+      ]
     },
     "drillFilterOtherVisuals": true
   }
