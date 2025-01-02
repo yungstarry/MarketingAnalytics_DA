@@ -115,3 +115,4 @@ Visualizes customer review sentiment and ratings distribution.
 - **Python (Jupyter Notebook):** Advanced data preprocessing and sentiment analysis.
 - **Power BI:** Interactive visualization and dashboard creation.
 
+[Click here to view on Power Bi Service](https://app.powerbi.com/view?r=eyJrIjoiMWFiMjQzYmItY2EwZC00MjgyLWFlZTQtZjBkMGU1YjVlNWVmIiwidCI6IjhmNzg3ODg0LTA2MTctNDEzMi05MzFhLTQyYjljM2ViNjM3YiJ9)
