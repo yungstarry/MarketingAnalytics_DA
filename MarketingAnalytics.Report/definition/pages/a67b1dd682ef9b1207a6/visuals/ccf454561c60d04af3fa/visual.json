@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
-  "name": "be9bf3774d0d222fc989",
+  "name": "ccf454561c60d04af3fa",
   "position": {
-    "x": 511,
-    "y": 102,
-    "z": 6001,
+    "x": 933,
+    "y": 102.62667710498609,
+    "z": 6002,
     "height": 253.7677833868747,
-    "width": 416.10452717112543,
-    "tabOrder": 6001
+    "width": 410.50670841994435,
+    "tabOrder": 6002
   },
   "visual": {
     "visualType": "clusteredColumnChart",
@@ -23,11 +23,11 @@
                       "Entity": "customer_reviews_with_sentiment"
                     }
                   },
-                  "Property": "Rating"
+                  "Property": "SentimentCategory"
                 }
               },
-              "queryRef": "customer_reviews_with_sentiment.Rating",
-              "nativeQueryRef": "Sum of Rating",
+              "queryRef": "customer_reviews_with_sentiment.SentimentCategory",
+              "nativeQueryRef": "SentimentCategory",
               "active": true
             }
           ]

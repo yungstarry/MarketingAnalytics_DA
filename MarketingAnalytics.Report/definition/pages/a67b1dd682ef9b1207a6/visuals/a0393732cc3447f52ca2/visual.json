@@ -1,16 +1,16 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
-  "name": "be9bf3774d0d222fc989",
+  "name": "a0393732cc3447f52ca2",
   "position": {
-    "x": 511,
-    "y": 102,
-    "z": 6001,
+    "x": 1352.8061982020893,
+    "y": 102.62667710498609,
+    "z": 6003,
     "height": 253.7677833868747,
-    "width": 416.10452717112543,
-    "tabOrder": 6001
+    "width": 567.245633453014,
+    "tabOrder": 6003
   },
   "visual": {
-    "visualType": "clusteredColumnChart",
+    "visualType": "lineChart",
     "query": {
       "queryState": {
         "Category": {
@@ -20,15 +20,33 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
+                      "Entity": "Calendar"
+                    }
+                  },
+                  "Property": "MonthNameShort"
+                }
+              },
+              "queryRef": "Calendar.MonthNameShort",
+              "nativeQueryRef": "MonthNameShort",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
                       "Entity": "customer_reviews_with_sentiment"
                     }
                   },
-                  "Property": "Rating"
+                  "Property": "SentimentCategory"
                 }
               },
-              "queryRef": "customer_reviews_with_sentiment.Rating",
-              "nativeQueryRef": "Sum of Rating",
-              "active": true
+              "queryRef": "customer_reviews_with_sentiment.SentimentCategory",
+              "nativeQueryRef": "SentimentCategory"
             }
           ]
         },

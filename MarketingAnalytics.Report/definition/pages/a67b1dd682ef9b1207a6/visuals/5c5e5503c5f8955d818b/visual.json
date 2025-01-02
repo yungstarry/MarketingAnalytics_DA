@@ -1,0 +1,94 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "name": "5c5e5503c5f8955d818b",
+  "position": {
+    "x": 1353,
+    "y": 371,
+    "z": 6005,
+    "height": 690,
+    "width": 567,
+    "tabOrder": 6005
+  },
+  "visual": {
+    "visualType": "scatterChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "customer_reviews_with_sentiment"
+                    }
+                  },
+                  "Property": "CustomerID"
+                }
+              },
+              "queryRef": "customer_reviews_with_sentiment.CustomerID",
+              "nativeQueryRef": "CustomerID",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "customer_reviews_with_sentiment"
+                    }
+                  },
+                  "Property": "SentimentCategory"
+                }
+              },
+              "queryRef": "customer_reviews_with_sentiment.SentimentCategory",
+              "nativeQueryRef": "SentimentCategory"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Calculations"
+                    }
+                  },
+                  "Property": "AVG Rating"
+                }
+              },
+              "queryRef": "_Calculations.AVG Rating",
+              "nativeQueryRef": "AVG Rating",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Calculations"
+                    }
+                  },
+                  "Property": "# of customer reviews"
+                }
+              },
+              "queryRef": "_Calculations.# of customer reviews",
+              "nativeQueryRef": "# of customer reviews"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

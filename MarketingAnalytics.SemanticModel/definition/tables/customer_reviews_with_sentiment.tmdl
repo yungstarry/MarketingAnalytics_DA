@@ -30,7 +30,7 @@ table customer_reviews_with_sentiment
 
 	column ReviewDate
 		dataType: dateTime
-		formatString: Long Date
+		formatString: d mmmm\, yyyy
 		lineageTag: 3e4f8f21-6038-435b-83f8-f86db3648155
 		summarizeBy: none
 		sourceColumn: ReviewDate
@@ -38,6 +38,8 @@ table customer_reviews_with_sentiment
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
 
 	column Rating
 		dataType: int64

@@ -1,0 +1,122 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "name": "7d694f7fa98c23dd9119",
+  "position": {
+    "x": 246.30402505196662,
+    "y": 371.32197716167695,
+    "z": 6004,
+    "height": 690.39764597899728,
+    "width": 1097.1724752314876,
+    "tabOrder": 6004
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "customer_reviews_with_sentiment"
+                    }
+                  },
+                  "Property": "ReviewDate"
+                }
+              },
+              "queryRef": "customer_reviews_with_sentiment.ReviewDate",
+              "nativeQueryRef": "ReviewDate"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "customer_reviews_with_sentiment"
+                    }
+                  },
+                  "Property": "CustomerID"
+                }
+              },
+              "queryRef": "customer_reviews_with_sentiment.CustomerID",
+              "nativeQueryRef": "CustomerID"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "customer_reviews_with_sentiment"
+                    }
+                  },
+                  "Property": "ReviewText"
+                }
+              },
+              "queryRef": "customer_reviews_with_sentiment.ReviewText",
+              "nativeQueryRef": "ReviewText"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "customer_reviews_with_sentiment"
+                    }
+                  },
+                  "Property": "SentimentCategory"
+                }
+              },
+              "queryRef": "customer_reviews_with_sentiment.SentimentCategory",
+              "nativeQueryRef": "SentimentCategory"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "customer_reviews_with_sentiment"
+                    }
+                  },
+                  "Property": "Rating"
+                }
+              },
+              "queryRef": "Sum(customer_reviews_with_sentiment.Rating)",
+              "nativeQueryRef": "Rating"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "19D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
