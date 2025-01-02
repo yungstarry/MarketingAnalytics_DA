@@ -30,15 +30,15 @@ Data was sourced from various platforms and stored in an MSSQL database before a
 - SQL queries were used to clean and structure the data in MSSQL.
 - Additional cleaning and preprocessing were done using Python (Jupyter Notebook) and Power BI Power Query.
 
-![Data sql1](images\sql1.png)
-![Data sql2](images\sql2.png)
-![Data python](images\python.png)
+![Data sql1](images/sql1.png)
+![Data sql2](images/sql2.png)
+![Data python](images/python.png)
 
 ### Exploratory Data Analysis
 - Performed to understand the data distribution, identify outliers, and uncover patterns.
 - Key statistics and trends were visualized.
 
-![EDA](images\tableview.png)
+![EDA](images/tableview.png)
 
 
 
@@ -58,7 +58,7 @@ Data was sourced from various platforms and stored in an MSSQL database before a
 ---
 
 ## 5. Data Structure Image
-![Data Structure](images\model.png)
+![Data Structure](images/model.png)
 
 ---
 
@@ -81,18 +81,18 @@ The analysis focused on three key areas:
 ### Overview Dashboard
 Displays a summary of key metrics like conversion rates, views, and average ratings.
 
-![Power BI](images\dash1.png)
+![Power BI](images/dash1.png)
 
 ### Social Media Details
 Provides a detailed breakdown of views, clicks, and likes by product and month.
 
-![Power BI](images\dash2.png)
+![Power BI](images/dash2.png)
 
 ### Customer Review Details
 Visualizes customer review sentiment and ratings distribution.
 
-![Power BI](images\dash3.png)
-![Power BI](images\dash4.png)
+![Power BI](images/dash3.png)
+![Power BI](images/dash4.png)
 
 ---
 
